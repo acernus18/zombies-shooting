@@ -9,9 +9,11 @@ public class ZombieController : MonoBehaviour
 	private AI ai;
 	private float moveSpeed = 0.1f;
 
+
 	public int Health = 5;
 	public GameObject Hit;
 	public GameObject Death;
+
 
 	private void Move(Vector3 direction)
 	{
@@ -66,6 +68,7 @@ public class ZombieController : MonoBehaviour
 		animator = GetComponent<Animator>();
 		ai = GetComponent<AI>();
 		ai.Coroutine = Attack();
+
 	}
 
 	// Update is called once per frame
@@ -73,4 +76,6 @@ public class ZombieController : MonoBehaviour
 	{
 		UpdateAnimator();
 	}
+
+
 }
