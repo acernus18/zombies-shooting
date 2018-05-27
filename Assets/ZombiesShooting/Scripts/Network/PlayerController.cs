@@ -6,6 +6,9 @@ public class PlayerController : Photon.MonoBehaviour
 {
 	private Vector3 currentPosition;
 	private Quaternion currentRotation;
+	private Animator currentAnimator;
+
+	private AudioSource shot;
 
 	private int health = 2;
 
@@ -34,33 +37,29 @@ public class PlayerController : Photon.MonoBehaviour
 		GetComponent<PhotonView>().ObservedComponents[0] = this;
 		currentPosition = transform.position;
 		currentRotation = transform.rotation;
-	}
-
-	public void Update()
-	{
-		if (photonView.isMine)
-		{
-			float x = transform.position.x;
-			float y = transform.position.y;
-			float z = Camera.main.transform.position.z;
-
-			Camera.main.transform.position = new Vector3(x, y, z);
-
-			if (Input.GetMouseButtonDown(0))
-			{
-				GameObject bullet = PhotonNetwork.Instantiate("Bullet", transform.position, transform.rotation, 0);
-				Physics2D.IgnoreCollision(GetComponent<Collider2D>(), bullet.GetComponent<Collider2D>());
-			}
-		}
+		currentAnimator = GetComponent<Animator>();
+		shot = GetComponent<AudioSource>();
 	}
 
 	public void FixedUpdate()
 	{
 		if (photonView.isMine)
 		{
+			Camera.main.transform.position = new Vector3(transform.position.x, transform.position.y, -8);
+
+			if (Input.GetMouseButtonDown(0))
+			{
+				shot.Play();
+				GameObject bullet = PhotonNetwork.Instantiate("Bullet", transform.position, transform.rotation, 0);
+				Physics2D.IgnoreCollision(GetComponent<Collider2D>(), bullet.GetComponent<Collider2D>());
+			}
+
 			Ray camRay = Camera.main.ScreenPointToRay(Input.mousePosition);
 			transform.rotation = Quaternion.LookRotation(Vector3.forward, transform.position - camRay.origin);
-			transform.position += new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized * 0.1f;
+
+			Vector3 movement = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized * 0.05f;
+			currentAnimator.SetBool("run", movement != Vector3.zero);
+			transform.position += movement;
 		}
 		else
 		{
