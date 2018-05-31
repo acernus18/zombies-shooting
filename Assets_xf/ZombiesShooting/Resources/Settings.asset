@@ -1,0 +1,39 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 22357fd06027a2c48bc40eb8d6478e71, type: 3}
+  m_Name: Settings
+  m_EditorClassIdentifier: 
+  toolbarSelectedIndex: 0
+  controllerType: 0
+  immortality: 0
+  speed: 8
+  sliding_speed: 1.5
+  shot_cooldown: 0.8
+  bullet_speed: 25
+  rush_speed_player: 1200
+  rush_cooldown: 2
+  time_slowdown: 2
+  slowdown_speed: 2.5
+  time_bonus: 10
+  field_size: 1
+  amount_bonuses: 1
+  min_sek_respawn: 1
+  max_sek_respawn: 2
+  amount_sparks: 100
+  sparks_OCS: 1
+  sparks_OCE: 1
+  amount_clones: 0
+  atacking: 0000000000000000000000000000000000000000
+  moving: 0000000000000000000000000000000000000000
+  rushing: 0000000000000000000000000000000000000000
+  rush_all: 0
+  atack_all: 0
+  move_all: 0
