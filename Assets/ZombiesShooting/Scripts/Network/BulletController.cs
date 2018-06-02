@@ -5,6 +5,7 @@ using UnityEngine;
 public class BulletController : Photon.MonoBehaviour
 {
 	private float moveSpeed = 10f;
+	public GameObject explosion;
 
 	private IEnumerator<WaitForSeconds> Travel()
 	{
@@ -28,9 +29,15 @@ public class BulletController : Photon.MonoBehaviour
 
 	public void OnCollisionEnter2D(Collision2D other)
 	{
+		explosion = (GameObject)Resources.Load("Explosion_Demo/Prefabs/Explosions/Explosion_04");
+		Instantiate(explosion, transform.position, transform.rotation);
+
+
 		if (photonView.isMine)
 		{
 			PhotonNetwork.Destroy(gameObject);
 		}
+		
+
 	}
 }
